@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f5">
+  <title>Daymark | Your todo list</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Todo navigation">
+      <a class="brand" href="/" aria-label="Daymark home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>daymark</span>
+      </a>
+
+      <div class="side-label">YOUR SPACE</div>
+      <nav class="side-nav" aria-label="Task views">
+        <button class="side-link is-active" type="button" data-filter="all" aria-current="page">
+          <span class="nav-glyph glyph-all" aria-hidden="true"></span>
+          <span>All tasks</span>
+          <span class="side-count" id="total-count">0</span>
+        </button>
+        <button class="side-link" type="button" data-filter="active">
+          <span class="nav-glyph glyph-active" aria-hidden="true"></span>
+          <span>In progress</span>
+          <span class="side-count" id="active-count">0</span>
+        </button>
+        <button class="side-link" type="button" data-filter="completed">
+          <span class="nav-glyph glyph-done" aria-hidden="true"></span>
+          <span>Completed</span>
+          <span class="side-count" id="completed-count">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <span class="local-icon" aria-hidden="true"></span>
+        <span><strong>Saved on this device</strong><small>Your list stays yours.</small></span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb"><span>YOUR SPACE</span><span class="crumb-divider">/</span><span id="current-view">ALL TASKS</span></div>
+        <div class="date-chip"><span class="date-dot" aria-hidden="true"></span><span id="today-date"></span></div>
+      </header>
+
+      <section class="workspace" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div class="heading-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> A LITTLE PROGRESS, EVERY DAY</p>
+            <h1 id="page-title">Your todos<span class="heading-period">.</span></h1>
+            <p class="subtitle" id="summary">A clear mind starts with a clear list.</p>
+          </div>
+          <div class="progress-stamp" aria-label="Tasks completed">
+            <span class="stamp-number" id="progress-number">0</span>
+            <span class="stamp-caption">TASKS<br>DONE</span>
+            <span class="stamp-ring" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <form class="add-form" id="add-form">
+          <label class="sr-only" for="new-task">What needs doing?</label>
+          <span class="add-mark" aria-hidden="true">+</span>
+          <input id="new-task" name="title" type="text" maxlength="200" placeholder="What needs doing?" autocomplete="off" required>
+          <span class="input-hint">ENTER</span>
+          <button class="add-button" type="submit"><span class="button-plus" aria-hidden="true">+</span><span>Add task</span></button>
+        </form>
+
+        <div class="list-tools">
+          <div class="filter-tabs" role="group" aria-label="Filter tasks">
+            <button type="button" class="filter-tab is-selected" data-filter="all" aria-pressed="true">All <span id="all-tab-count">0</span></button>
+            <button type="button" class="filter-tab" data-filter="active" aria-pressed="false">Active</button>
+            <button type="button" class="filter-tab" data-filter="completed" aria-pressed="false">Done</button>
+          </div>
+          <label class="search-box">
+            <span class="search-icon" aria-hidden="true"></span>
+            <span class="sr-only">Search tasks</span>
+            <input id="search-input" type="search" placeholder="Find a task" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="list-heading">
+          <div class="list-heading-left">
+            <button class="toggle-all" id="toggle-all" type="button" aria-label="Complete all tasks" title="Complete all tasks"><span aria-hidden="true"></span></button>
+            <span id="list-title">ALL TASKS</span>
+          </div>
+          <span class="list-counter" id="list-counter">0 ITEMS</span>
+        </div>
+
+        <ul class="todo-list" id="todo-list" aria-label="Todo tasks" aria-live="polite" aria-busy="true"></ul>
+
+        <div class="list-footer" id="list-footer" hidden>
+          <span id="remaining-label">0 tasks left</span>
+          <button id="clear-completed" type="button"><span class="clear-icon" aria-hidden="true"></span>Clear completed</button>
+        </div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+      <footer class="page-footer"><span>MAKE SPACE FOR WHAT MATTERS.</span><span>DAYMARK <span class="footer-spark">*</span> 01</span></footer>
+    </main>
+  </div>
+</body>
+</html>
