@@ -1,4 +1,4 @@
-# Daymark Todo
+# todo
 
 A small, local-first Todo app built with Python, Flask, and SQLite. Tasks are saved in `instance/todos.sqlite3` and remain available after restarting the app.
 
